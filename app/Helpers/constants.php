@@ -10,5 +10,5 @@ define('DELETED', 1);
 define('UN_DELETE', 0);
 
 define('IMG_DIR', 'images/');
-define('PAGINATE_NUM', 10);
+define('PAGINATE_NUM', 12);
 define('IS_PAGINATE', true);

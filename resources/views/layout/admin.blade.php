@@ -71,9 +71,6 @@
                     <li>
                         <a href="{{ action('Admin\ProductController@index') }}"><i class="fa fa-fw fa-dashboard"></i>Product Management</a>
                     </li>
-                    <li>
-                        <a href="{{ action('Admin\RoleController@index') }}"><i class="fa fa-fw fa-dashboard"></i>Role Management</a>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
