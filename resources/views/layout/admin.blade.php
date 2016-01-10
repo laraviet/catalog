@@ -12,6 +12,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('admins/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admins/css/select2.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="{{ asset('admins/css/sb-admin.css') }}" rel="stylesheet">
@@ -104,6 +105,18 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('admins/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admins/js/select2.full.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $(".categories").select2();
+
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove();
+                });
+            }, 2000);
+        });
+    </script>
     @yield('script_close')
 </body>
 </html>

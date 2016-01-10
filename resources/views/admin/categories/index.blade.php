@@ -3,6 +3,13 @@
 @section('content')
     <div class="page-header">
         <h1>Categories</h1>
+
+        @if (Session::has('message'))
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> {{ Session::get('message') }}
+            </div>
+        @endif
     </div>
 
 
@@ -34,11 +41,15 @@
                 </tr>
 
                 @endforeach
-
                 </tbody>
             </table>
 
+            <div>
+                {!! $categories->render() !!}
+            </div>
+
             <a class="btn btn-success" href="{{ action('Admin\CategoryController@create') }}">Create</a>
+
         </div>
     </div>
 

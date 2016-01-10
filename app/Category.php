@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class Category extends Model
 {
@@ -18,18 +19,22 @@ class Category extends Model
 
     public function children()
     {
-        return $this->hasMany('App\Category', 'parent_id');
+        return $this->hasMany('App\Category', 'parent_id')->where('del_flag', UN_DELETE);
     }
 
     public function parent()
     {
-        return $this->belongsTo('App\Category', 'parent_id');
+        return $this->belongsTo('App\Category', 'parent_id')->where('del_flag', UN_DELETE);
     }
 
-    public static function getAllCategories()
+    public static function getAllCategories($isPaginate = false)
     {
+        if ($isPaginate) {
+            return static::where('del_flag', UN_DELETE)->paginate(PAGINATE_NUM);
+        }
         return static::where('del_flag', UN_DELETE)->get();
     }
+
     /**
      * get all categories array format of system
      *
@@ -37,7 +42,7 @@ class Category extends Model
      */
     public static function getAllParentCategory($category = null)
     {
-        $arrCategories = static::get()->lists('title', 'id')->toArray();
+        $arrCategories = static::where('del_flag', UN_DELETE)->lists('title', 'id')->toArray();
         $arrCategories = array_merge([STR_SUPER_PARENT_CATEGORY], $arrCategories);
         if ($category) {
             $exceptCategories = static::getChildCats($category->id);
@@ -82,6 +87,26 @@ class Category extends Model
         return static::whereIn('id', $childIds)->get()->lists('title', 'id')->toArray();
     }
 
+    public function isEndChild()
+    {
+        if ($this->children->count()) {
+            return false;
+        }
+        return true;
+    }
+
+    public static function getAllEndChildrenCategory()
+    {
+        $allCategories = static::getAllCategories();
+        $endChildrenCategory = new EloquentCollection;
+        foreach($allCategories as $category) {
+            if ($category->isEndChild()) {
+                $endChildrenCategory->push($category);
+            }
+        }
+        return $endChildrenCategory->lists('title', 'id')->all();
+    }
+
     public function updateCategory($inputData)
     {
         $this->title = $inputData["title"];
@@ -93,7 +118,17 @@ class Category extends Model
     public static function deleteCategory($id)
     {
         $childIds = static::getChildCatIds($id);
+        $ids = array_merge($childIds, [(int) $id]);
 
-        static::whereIn('id', array_merge($childIds, [(int) $id]))->update(['del_flag' => DELETED]);
+        static::whereIn('id', $ids)->update(['del_flag' => DELETED]);
+
+        $categories = static::whereIn('id', $ids)->get();
+        foreach($categories as $category) {
+            $arrProduct = [];
+            foreach($category->products as $product) {
+                $arrProduct[] = $product->id;
+            }
+            $category->products()->detach($arrProduct);
+        }
     }
 }

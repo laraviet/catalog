@@ -15,7 +15,7 @@ class CategoryController extends Controller {
 	 */
 	public function index()
 	{
-		$categories = Category::getAllCategories();
+		$categories = Category::getAllCategories(IS_PAGINATE);
 
 		return view('admin.categories.index', compact('categories'));
 	}

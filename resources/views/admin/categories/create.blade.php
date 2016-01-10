@@ -24,8 +24,8 @@
                     {!! \App\Libs\ErrorDisplay::getInstance()->displayIndividual($errors, "parent_id") !!}
                 </div>
 
-            <a class="btn btn-default" href="{{ action('Admin\CategoryController@index') }}">Back</a>
-            <button class="btn btn-primary" type="submit" >Create</a>
+                <a class="btn btn-default" href="{{ action('Admin\CategoryController@index') }}">Back</a>
+                <button class="btn btn-primary" type="submit" >Create</button>
             </form>
         </div>
     </div>

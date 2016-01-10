@@ -25,7 +25,6 @@ class ProductRequest extends Request
     {
         return [
             "name" => "required",
-            "photo" => "required",
             "model" => "required",
         ];
     }

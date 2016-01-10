@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,7 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-		$products = Product::all();
+		$products = Product::getAllProduct(IS_PAGINATE);
 
 		return view('admin.products.index', compact('products'));
 	}
@@ -27,7 +28,9 @@ class ProductController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.products.create');
+        $endChildCategories = Category::getAllEndChildrenCategory();
+
+		return view('admin.products.create', compact('endChildCategories'));
 	}
 
 	/**
@@ -38,13 +41,10 @@ class ProductController extends Controller {
 	 */
 	public function store(ProductRequest $request)
 	{
+        $inputData = $request->all();
 		$product = new Product();
 
-		$product->name = $request->input("name");
-        $product->photo = $request->input("photo");
-        $product->model = $request->input("model");
-
-		$product->save();
+        $product->updateProduct($inputData);
 
 		return redirect()->action('Admin\ProductController@index')->with('message', 'Item created successfully.');
 	}
@@ -71,8 +71,9 @@ class ProductController extends Controller {
 	public function edit($id)
 	{
 		$product = Product::findOrFail($id);
+        $endChildCategories = Category::getAllEndChildrenCategory();
 
-		return view('admin.products.edit', compact('product'));
+		return view('admin.products.edit', compact('product', 'endChildCategories'));
 	}
 
 	/**
@@ -84,13 +85,10 @@ class ProductController extends Controller {
 	 */
 	public function update(ProductRequest $request, $id)
 	{
+        $inputData = $request->all();
 		$product = Product::findOrFail($id);
 
-		$product->name = $request->input("name");
-        $product->photo = $request->input("photo");
-        $product->model = $request->input("model");
-
-		$product->save();
+        $product->updateProduct($inputData);
 
 		return redirect()->action('Admin\ProductController@index')->with('message', 'Item updated successfully.');
 	}
@@ -103,8 +101,7 @@ class ProductController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$product = Product::findOrFail($id);
-		$product->delete();
+		Product::deleteProduct($id);
 
 		return redirect()->action('Admin\ProductController@index')->with('message', 'Item deleted successfully.');
 	}

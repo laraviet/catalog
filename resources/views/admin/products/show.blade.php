@@ -11,20 +11,24 @@
 
             <form action="#">
                 <div class="form-group">
-                    <label for="nome">ID</label>
+                    <label for="nome">Id</label>
                     <p class="form-control-static">{{$product->id}}</p>
                 </div>
                 <div class="form-group">
-                     <label for="name">NAME</label>
+                     <label for="name">Name</label>
                      <p class="form-control-static">{{$product->name}}</p>
                 </div>
-                    <div class="form-group">
-                     <label for="photo">PHOTO</label>
-                     <p class="form-control-static">{{$product->photo}}</p>
+                <div class="form-group">
+                    <label for="photo">Photo</label>
+                    <img src={{$product->photo}} class="img-responsive" alt="{{ $product->name }}" width="150" height="150">
                 </div>
-                    <div class="form-group">
-                     <label for="model">MODEL</label>
+                <div class="form-group">
+                     <label for="model">Model</label>
                      <p class="form-control-static">{{$product->model}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="model">Categories</label>
+                    <p class="form-control-static">{{$product->getCategoryOfProduct()}}</p>
                 </div>
             </form>
 
