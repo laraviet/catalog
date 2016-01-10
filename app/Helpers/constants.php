@@ -1,7 +1,7 @@
 <?php
 
-define('ROLE_ADMIN', 0);
-define('ROLE_CUSTOMER', 1);
+define('ROLE_ADMIN', 1);
+define('ROLE_CUSTOMER', 2);
 
 define('SUPER_PARENT_CATEGORY', 0);
 define('STR_SUPER_PARENT_CATEGORY', 'Super Parent Category');
