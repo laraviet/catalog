@@ -43,7 +43,7 @@ class Category extends Model
     public static function getAllParentCategory($category = null)
     {
         $arrCategories = static::where('del_flag', UN_DELETE)->lists('title', 'id')->toArray();
-        $arrCategories = array_merge([STR_SUPER_PARENT_CATEGORY], $arrCategories);
+        $arrCategories = array_merge(['— select parent —'], $arrCategories);
         if ($category) {
             $exceptCategories = static::getChildCats($category->id);
             $exceptCategories = $exceptCategories +[$category->id => $category->title];

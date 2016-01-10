@@ -9,13 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>3 Col Portfolio - Start Bootstrap Template</title>
+    <title>Modern Business - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('fronts/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{ asset('fronts/css/3-col-portfolio.css') }}" rel="stylesheet">
+    <link href="{{ asset('fronts/css/modern-business.css') }}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{ asset('fronts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,15 +46,69 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">About</a>
+                    <a href="about.html">About</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a href="services.html">Services</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="contact.html">Contact</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="portfolio-1-col.html">1 Column Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="portfolio-2-col.html">2 Column Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="portfolio-3-col.html">3 Column Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="portfolio-4-col.html">4 Column Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="portfolio-item.html">Single Portfolio Item</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="blog-home-1.html">Blog Home 1</a>
+                        </li>
+                        <li>
+                            <a href="blog-home-2.html">Blog Home 2</a>
+                        </li>
+                        <li>
+                            <a href="blog-post.html">Blog Post</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="full-width.html">Full Width Page</a>
+                        </li>
+                        <li>
+                            <a href="sidebar.html">Sidebar Page</a>
+                        </li>
+                        <li>
+                            <a href="faq.html">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="404.html">404</a>
+                        </li>
+                        <li>
+                            <a href="pricing.html">Pricing Table</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -74,7 +131,6 @@
                 <p>Copyright &copy; FiveTii Team</p>
             </div>
         </div>
-        <!-- /.row -->
     </footer>
 
 </div>
@@ -85,6 +141,13 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('fronts/js/bootstrap.min.js') }}"></script>
+
+<!-- Script to Activate the Carousel -->
+<script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+</script>
 
 </body>
 

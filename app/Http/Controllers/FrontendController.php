@@ -16,4 +16,11 @@ class FrontendController extends Controller
 
         return view('front.index', compact('products'));
     }
+
+    public function show($productId)
+    {
+        $product = Product::findOrFail($productId);
+
+        return view('front.show', compact('product'));
+    }
 }
