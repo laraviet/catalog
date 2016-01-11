@@ -68,15 +68,19 @@
             </ul>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
+                    @can('manage_categories')
                     <li>
                         <a href="{{ action('Admin\ProductController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>DashBoards</a>
                     </li>
                     <li>
                         <a href="{{ action('Admin\CategoryController@index') }}"><i class="fa fa-fw fa-dashboard"></i>Category Management</a>
                     </li>
+                    @endcan
+                    @can('manage_products')
                     <li>
                         <a href="{{ action('Admin\ProductController@index') }}"><i class="fa fa-fw fa-dashboard"></i>Product Management</a>
                     </li>
+                    @endcan
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

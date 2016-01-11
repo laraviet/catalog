@@ -37,6 +37,10 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * Many to many relationship
+     * @return App\Role
+     */
     public function roles()
     {
         return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id');
