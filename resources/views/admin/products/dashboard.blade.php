@@ -57,7 +57,6 @@
                 {!! $products->render() !!}
             </div>
 
-            <a class="btn btn-success" href="{{ action('Admin\ProductController@create') }}">Create</a>
         </div>
     </div>
 
