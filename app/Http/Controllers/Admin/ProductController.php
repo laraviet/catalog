@@ -106,4 +106,12 @@ class ProductController extends Controller {
 		return redirect()->action('Admin\ProductController@index')->with('message', 'Item deleted successfully.');
 	}
 
+    public function dashboard()
+    {
+        $products = Product::getAllProduct(IS_PAGINATE);
+        $superCategories = Category::getSuperCategories();
+
+        return view('admin.products.dashboard', compact('products', 'superCategories'));
+    }
+
 }
