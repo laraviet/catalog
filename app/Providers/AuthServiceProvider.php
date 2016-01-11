@@ -26,6 +26,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         parent::registerPolicies($gate);
 
-        //
+        $gate->define('manage_categories', function($user) {
+           return $user->roles->contains(ROLE_ADMIN);
+        });
+
+        $gate->define('manage_products', function($user) {
+           return $user->roles->contains(ROLE_ADMIN);
+        });
     }
 }
