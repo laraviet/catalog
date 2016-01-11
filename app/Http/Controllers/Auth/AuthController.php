@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -31,6 +32,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+        $this->redirectTo = '/admin/products/dashboard';
     }
 
     /**
@@ -65,5 +67,15 @@ class AuthController extends Controller
         $user->roles()->attach(ROLE_CUSTOMER);
 
         return $user;
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return redirect('auth/login');
     }
 }

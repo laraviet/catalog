@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/', function() {
+    return redirect()->action('Admin\ProductController@dashboard');
+});
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::get('products/dashboard', 'Admin\ProductController@dashboard');
