@@ -35,6 +35,33 @@ class Category extends Model
         return static::where('del_flag', UN_DELETE)->get();
     }
 
+    public function getSuperCategories()
+    {
+        return static::with('children')->where('del_flag', UN_DELETE)->where('parent_id', SUPER_PARENT_CATEGORY)->get();
+    }
+
+    public function getDropdownCategories($cat = null, $space = '')
+    {
+        if ($cat === null) {
+            $categories = static::getSuperCategories();
+        } else {
+            $categories = $cat->children;
+        }
+        $arrCategories = [];
+        foreach($categories as $category) {
+            $temSpace = $space;
+            $arrcategory = [];
+            $arrcategory['id'] = $category->id;
+            $arrcategory['title'] = $temSpace . $category->title;
+            $arrCategories[] = $arrcategory;
+            if($category->children->count()) {
+                $temSpace .= '--';
+                $arrCategories = array_merge($arrCategories, $category->getDropdownCategories($category, $temSpace));
+            }
+        }
+
+        return $arrCategories;
+    }
     /**
      * get all categories array format of system
      *
@@ -43,7 +70,7 @@ class Category extends Model
     public static function getAllParentCategory($category = null)
     {
         $arrCategories = static::where('del_flag', UN_DELETE)->lists('title', 'id')->toArray();
-        $arrCategories = array_merge(['— select parent —'], $arrCategories);
+        $arrCategories = ['— select parent —'] + $arrCategories;
         if ($category) {
             $exceptCategories = static::getChildCats($category->id);
             $exceptCategories = $exceptCategories +[$category->id => $category->title];
@@ -78,6 +105,21 @@ class Category extends Model
         }
 
         return $childIds;
+    }
+
+    public static function getProductByCatIds($catId)
+    {
+        $catIds = static::getChildCatIds($catId);
+        $catIds = array_merge($catIds, (array) (int)$catId);
+        $categories = static::whereIn('id', $catIds)->get();
+        $arrProduct = [];
+        foreach($categories as $category) {
+            foreach($category->products as $product) {
+                $arrProduct[] = $product->id;
+            }
+        }
+
+        return $products = Product::whereIn('id', $arrProduct)->paginate(PAGINATE_NUM);
     }
 
     public static function getChildCats($parentIds)

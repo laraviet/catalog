@@ -48,7 +48,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Catalog Admin</a>
+                <a class="navbar-brand" href="#">Catalog</a>
+                <ul class="nav navbar-nav">
+
+                </ul>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -58,13 +61,16 @@
                      <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Logout</a>
+                            <a href="{{ action('Auth\AuthController@getLogout') }}"><i class="fa fa-fw fa-user"></i> Logout</a>
                         </li>
                     </ul>
                 </li>
             </ul>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="{{ action('Admin\ProductController@dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>DashBoards</a>
+                    </li>
                     <li>
                         <a href="{{ action('Admin\CategoryController@index') }}"><i class="fa fa-fw fa-dashboard"></i>Category Management</a>
                     </li>

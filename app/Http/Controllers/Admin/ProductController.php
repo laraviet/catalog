@@ -14,7 +14,8 @@ class ProductController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+
+    public function index()
 	{
 		$products = Product::getAllProduct(IS_PAGINATE);
 
@@ -109,9 +110,15 @@ class ProductController extends Controller {
     public function dashboard()
     {
         $products = Product::getAllProduct(IS_PAGINATE);
-        $superCategories = Category::getSuperCategories();
 
-        return view('admin.products.dashboard', compact('products', 'superCategories'));
+        return view('admin.products.dashboard', compact('products'));
+    }
+
+    public function dashboardCat($categoryId)
+    {
+        $products = Category::getProductByCatIds($categoryId);
+
+        return view('admin.products.dashboard', compact('products'));
     }
 
 }

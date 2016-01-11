@@ -2,7 +2,19 @@
 
 @section('content')
     <div class="page-header">
-        <h1>Products</h1>
+        <div class="row">
+            <h1>Products
+                <li class="dropdown pull-right" style="list-style: none">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h3>Select Category</h3> </a>
+                    <ul class="dropdown-menu">
+                        @foreach($allCategories as $category)
+                            <li><a href="{{ action('Admin\ProductController@dashboardCat', $category['id']) }}">{{ $category['title'] }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
+            </h1>
+
+        </div>
 
         @if (Session::has('message'))
             <div class="alert alert-success">

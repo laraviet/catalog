@@ -3,6 +3,7 @@
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('categories','Admin\CategoryController');
     Route::get('products/dashboard', 'Admin\ProductController@dashboard');
+    Route::get('products/dashboard/category/{category_id}', 'Admin\ProductController@dashboardCat');
     Route::resource('products','Admin\ProductController');
 });
 
