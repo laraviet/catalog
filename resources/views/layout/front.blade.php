@@ -80,7 +80,7 @@
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright &copy; FiveTii Team</p>
+                <p>Copyright &copy; ThanhNT</p>
             </div>
         </div>
     </footer>
